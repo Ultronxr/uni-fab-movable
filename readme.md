@@ -1,6 +1,7 @@
-## 可拖动的 Fab 悬浮按钮
+## 可拖动的 uni-fab 悬浮按钮
 
 > **组件名：uni-fab-movable**
+> **链接：https://github.com/Ultronxr/uni-fab-movable**
 
 基于 `uni-fab` v1.2.5 版本修改，官方文档见此：[链接](https://uniapp.dcloud.io/component/uniui/uni-fab) 查看。
 
@@ -22,7 +23,7 @@
 
 ```javascript
 <script>
-    import uniFabMovable from "@/uni_modules/uni-fab/components/uni-fab/uni-fab-movable.vue"
+    import uniFabMovable from "@/uni_modules/uni-fab-movable/components/uni-fab-movable/uni-fab-movable.vue"
     export default {
     components: {
         uniFabMovable,

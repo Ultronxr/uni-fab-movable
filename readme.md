@@ -36,7 +36,9 @@
                 backgroundColor: '#fff',
                 selectedColor: '#007AFF',
                 buttonColor: '#007AFF',
-                iconColor: '#fff'
+                iconColor: '#fff',
+                // 可选图标参见 uni-icons : https://uniapp.dcloud.net.cn/component/uniui/uni-icons.html
+                icon: 'notification-filled',
             },
             fabContent: [
                 {

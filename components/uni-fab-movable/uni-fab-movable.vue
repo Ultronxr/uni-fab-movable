@@ -44,10 +44,14 @@
 				:style="{ 'background-color': styles.buttonColor, 'bottom': nvueBottom }"
 				@click="_onClick"
 			>
-				<uni-icons class="fab-circle-icon" :type="styles.icon" :color="styles.iconColor" size="32"
+				<uni-icons v-if="styles.imageIconSrc == null" class="fab-circle-icon"
+					:type="styles.icon" :color="styles.iconColor" size="32"
 					:class="{'uni-fab__plus--active': isShow && content.length > 0}"></uni-icons>
 				<!-- <view class="fab-circle-v"  :class="{'uni-fab__plus--active': isShow && content.length > 0}"></view>
 				<view class="fab-circle-h" :class="{'uni-fab__plus--active': isShow  && content.length > 0}"></view> -->
+				
+				<!-- 自定义图片图标 -->
+				<image v-if="styles.imageIconSrc != null" class="fab-circle-icon-image" :src="styles.imageIconSrc" />
 			</view>
 		</movable-view>
 	</movable-area>
@@ -142,7 +146,8 @@
 					backgroundColor: '#fff',
 					buttonColor: '#007AFF',
 					iconColor: '#fff',
-					icon: 'plusempty'
+					icon: 'plusempty',
+					imageIconSrc: null,
 				},
 				movable: {
 					left: 0,
@@ -507,6 +512,11 @@
 		transform: rotate(0deg);
 		transition: transform 0.3s;
 		font-weight: 200;
+	}
+	
+	.fab-circle-icon-image {
+		width: $button-width;
+		height: $button-height;
 	}
 
 	.uni-fab__plus--active {

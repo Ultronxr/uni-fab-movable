@@ -39,6 +39,8 @@
                 iconColor: '#fff',
                 // 可选图标参见 uni-icons : https://uniapp.dcloud.net.cn/component/uniui/uni-icons.html
                 icon: 'notification-filled',
+                // 自定义图片 icon ，如果传入了该属性值，则优先使用图片 icon 而不是 uni-icons
+                imageIconSrc: '/static/icon.png',
             },
             fabContent: [
                 {

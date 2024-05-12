@@ -15,7 +15,7 @@
         <uniFabMovable ref="fab" :pattern="fabPattern" :content="fabContent"
             horizontal="right" vertical="top"
             direction="horizontal" @fabClick="fabClick"
-            :movableDisabled="false" :movableCanDocking="true"
+            :movableDisabled="false" :movableCanDocking="true" :avoidDropInTabbar="true"
             :movableTopPx="150" :movableRightPx="0" :movableOffsetToLeftOrRight="3" />
     </view>
 </template>
@@ -43,12 +43,12 @@
                 imageIconSrc: '/static/icon.png',
             },
             fabContent: [
-                {
-                    iconPath: '/static/image.png',
-                    selectedIconPath: '/static/image-active.png',
-                    text: '相册',
-                    active: false
-                },
+                // {
+                //     iconPath: '/static/image.png',
+                //     selectedIconPath: '/static/image-active.png',
+                //     text: '相册',
+                //     active: false
+                // },
             ],
             // 悬浮按钮点击事件
             fabClick() {

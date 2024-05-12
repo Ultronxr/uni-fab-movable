@@ -134,6 +134,11 @@
 				type: Number,
 				default: 0
 			},
+			// 是否避免落入底部的 tabbar 区域（tabbar 的点击事件优先于 movable 的拖动事件，落入之后很难拖出来）
+			avoidDropInTabbar: {
+				type: Boolean,
+				default: false
+			}
 		},
 		data() {
 			return {
@@ -157,8 +162,8 @@
 					windowHeight: 0,
 					btnWidth: 0,
 					btnHeight: 0,
-					x: 10000,
-					y: 10000,
+					x: 0,
+					y: 0,
 					old: {
 						x: 0,
 						y: 0
@@ -242,6 +247,8 @@
 			}
 			// 初始化样式
 			this.styles = Object.assign({}, this.styles, this.pattern)
+			// 初始化位置
+			this.initPosition();
 		},
 		mounted() {
 			this.getSysInfo()
@@ -286,11 +293,19 @@
 					return this.isShow && this.direction === paramA ? this.contentWidth : this.contentWidthMin
 				}
 			},
-			
+			/**
+			 * 初始化按钮位置。避免出现按钮初始位置与其该在的位置距离相差过大，导致刚进页面时按钮出现跳跃现象
+			 */
+			initPosition() {
+				let sysInfo = uni.getSystemInfoSync();
+				this.movable.windowWidth = sysInfo.windowWidth;
+				this.movable.windowHeight = sysInfo.windowHeight;
+				this.movable.x = this.movable.windowWidth - this.movable.btnWidth - this.movableRightPx - this.movableOffsetToLeftOrRight;
+				this.movable.y = 0 + this.movableTopPx;
+				this.movable.old.x = this.movable.x;
+				this.movable.old.y = this.movable.y;
+			},
 			getSysInfo() {
-				let sysInfo = uni.getSystemInfoSync()
-				this.movable.windowWidth = sysInfo.windowWidth
-				this.movable.windowHeight = sysInfo.windowHeight
 				let view = uni.createSelectorQuery().in(this).select(".movable-view")
 				view.boundingClientRect(rect => {
 					this.movable.btnWidth = rect.width
@@ -328,6 +343,10 @@
 						this.$nextTick(res => {
 							this.movable.x = this.movable.windowWidth - this.movable.btnWidth - this.movableOffsetToLeftOrRight
 						})
+					}
+					// 避免按钮落入底部 tab 栏中
+					if(this.avoidDropInTabbar && this.movable.y >= this.movable.windowHeight - 100 - this.movable.btnHeight / 2) {
+						this.movable.y = this.movable.windowHeight - 100 - this.movable.btnHeight / 2;
 					}
 					
 					this.movable.isMoving = false
